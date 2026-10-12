@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbeef0">
+<meta name="apple-mobile-web-app-title" content="House Expenses">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>House Expenses</title>
+</head>
+<body style="margin:0;background:#fbeef0;color:#9a6b78;font:600 17px/1.5 system-ui,sans-serif">
+<p id="msg" style="text-align:center;padding:42vh 16px 0">Opening House Expenses…</p>
+<script>
+var API = 'https://script.google.com/macros/s/AKfycbw2FPTWvFaJKQLbPQmMpQyHe7nnowKBWPFQM7gwtGIfFmd3FEzTezhkAS-Hd1t154GI/exec';
+fetch(API + '?page=1', { credentials: 'omit' }).then(function (r) {
+  if (!r.ok) throw new Error(r.status);
+  return r.text();
+}).then(function (html) {
+  html = html.replace('<head>', '<head><script>window.HX_API = ' + JSON.stringify(API) + ';<\/script>');
+  document.open(); document.write(html); document.close();
+}).catch(function () {
+  document.getElementById('msg').textContent = 'Could not open House Expenses. Check your internet and reload the page.';
+});
+</script>
+</body>
+</html>
